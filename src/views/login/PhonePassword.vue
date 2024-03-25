@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useField, useForm } from 'vee-validate'
+import { useField, useForm, type SubmissionContext,  type InvalidSubmissionContext } from 'vee-validate'
 import { object, string, number } from 'yup'
 import { toTypedSchema } from '@vee-validate/yup'
 
@@ -13,7 +13,7 @@ interface Form {
     password: string;
 }
 
-const {errors, defineField, handleSubmit, isSubmitting} = useForm<Form>({
+const {defineField, handleSubmit, isSubmitting} = useForm<Form>({
     validationSchema: schema,
 })
 
@@ -23,17 +23,21 @@ const [password, passwordAttrs] = defineField('password')
 const phoneField = useField<number>('phone')
 const passwordField = useField<string>('password')
 
-function onSuccess(values: Form) {
-    console.log("success", values.phone)
+function submitHandler(values: Form, ctx: SubmissionContext) {
+    console.log("success", values, ctx)
     return new Promise<void>(resolve => {
         setTimeout(() => {
             console.log('Submitted', JSON.stringify(values, null, 2));
             resolve();
         }, 2000);
-  });
+    });
 }
 
-const onSubmit = handleSubmit(onSuccess)
+function invalidSubmitHandler(ctx: InvalidSubmissionContext<Form>) {
+    console.log(ctx)
+}
+
+const onSubmit = handleSubmit(submitHandler, invalidSubmitHandler)
 
 </script>
 
@@ -42,25 +46,32 @@ const onSubmit = handleSubmit(onSuccess)
         <div class="row mb-3">
             <label for="phone" class="col-sm-2 col-form-label">手机号</label>
             <div class="col-sm-10">
-                <input name="phone" class="form-control" v-model="phone" v-bind="phoneAttrs" id="phone" @blur="phoneField.handleBlur"/>
+                <input name="phone" 
+                class="form-control"
+                :class="{ 'is-valid': phoneField.meta.valid, 'is-invalid': phoneField.meta.touched && !phoneField.meta.valid }"
+                id="phone"
+                v-model="phone"
+                v-bind="phoneAttrs"
+                @blur="phoneField.handleBlur"/>
                 <div v-if="!phoneField.meta.valid && phoneField.meta.touched" class="invalid-feedback">{{ phoneField.errorMessage }}</div>
             </div>
         </div>
         <div class="row mb-3">
             <label for="password" class="col-sm-2 col-form-label">密码</label>
-            <div class="col-sm-8">
-                <input name="password" class="form-control" 
-                :class="{ 'is-valid': passwordField.meta.valid, 'is-invalid': passwordField.meta.touched && !passwordField.meta.valid }"
+            <div class="col-sm-10">
+                <input name="password"
+                class="form-control" :class="{ 'is-valid': passwordField.meta.valid, 'is-invalid': passwordField.meta.touched && !passwordField.meta.valid }"
                 v-model="password"
                 v-bind="passwordAttrs"
                 type="password"
                 id="password" 
                 @blur="passwordField.handleBlur"
-                aria-describedby="validationPasswordFeedback"
                 />
+                <div class="invalid-feedback" v-if="!passwordField.meta.valid && passwordField.meta.touched">{{ passwordField.errorMessage }}</div>
             </div>
-            <div class="col-sm-2 invalid-feedback" id="validationPasswordFeedback" v-if="!passwordField.meta.valid && passwordField.meta.touched">{{ passwordField.errorMessage }}</div>
         </div>
-        <button :disabled="isSubmitting" type="submit">{{ isSubmitting ? "请求中..." : "登录" }}</button>
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-primary" :disabled="isSubmitting" type="submit">{{ isSubmitting ? "请求中..." : "登录" }}</button>
+        </div>
     </form>
 </template>
