@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {getCookie} from '../utils/cookie'
 
 axios.defaults.timeout = 50000
 
@@ -22,7 +23,17 @@ function getPrePayParams(amount: number, openid: string) {
     })
 }
 
+function getUserInfo() {
+    const token = getCookie('token')
+    return axios.get(paySystemApiDomain + `/users/userinfo`, {
+        headers: {
+            'Authorization': token
+        }
+    })
+}
+
 export {
     authorize,
-    getPrePayParams
+    getPrePayParams,
+    getUserInfo,
 }
