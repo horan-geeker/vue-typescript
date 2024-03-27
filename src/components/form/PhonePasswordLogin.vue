@@ -31,8 +31,8 @@ const onSubmit = handleSubmit(submitHandler, invalidSubmitHandler)
 </script>
 
 <template>
-    <div class="row justify-content-center">
-        <form class="col-lg-4" autocomplete="on" @submit.prevent="onSubmit" novalidate>
+    <div>
+        <form autocomplete="on" @submit.prevent="onSubmit" novalidate>
             <div class="row mb-3">
                 <label for="phone" class="col-sm-4 col-form-label text-md-end">手机号</label>
                 <div class="col-sm-8">

@@ -1,28 +1,29 @@
 <script lang="ts" setup>
+import { ref } from 'vue'
 import PhonePasswordLogin from '../components/form/PhonePasswordLogin.vue'
 import PhoneSMSLogin from '../components/form/PhoneSMSLogin.vue'
 
-const activeComponent = 'PhonePasswordLogin'
-
-function clickTab() {
-    activeComponent == 'PhonePasswordLogin' ? activeComponent = 'PhoneSMSLogin' : activeComponent = 'PhonePasswordLogin'
-    console.log(activeComponent)
-}
+const activeComponent = ref('PhonePasswordLogin')
 
 </script>
 
 <template>
     <div class="container">
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link" :class="{active : activeComponent == PhonePasswordLogin}" @click="clickTab()">密码登录</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" :class="{active: activeComponent == PhoneSMSLogin}" @click="clickTab">短信验证码登录</a>
-            </li>
-        </ul>
-        <KeepAlive>
-            <component :is="activeComponent"></component>
-        </KeepAlive>
+        <div class="col-lg-4">
+            <ul class="nav nav-tabs nav-fill m-md-2">
+                <li class="nav-item">
+                    <a class="nav-link" :class="{ active: activeComponent === 'PhonePasswordLogin' }"
+                        @click="activeComponent = 'PhonePasswordLogin'">密码登录</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" :class="{ active: activeComponent === 'PhoneSMSLogin' }"
+                        @click="activeComponent = 'PhoneSMSLogin'">短信验证码登录</a>
+                </li>
+            </ul>
+            <KeepAlive>
+                <PhonePasswordLogin v-if="activeComponent === 'PhonePasswordLogin'" />
+                <PhoneSMSLogin v-else />
+            </KeepAlive>
+        </div>
     </div>
 </template>

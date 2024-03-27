@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 // validate init
 import { defineRule } from 'vee-validate'
 import * as AllRules from '@vee-validate/rules'
-Object.keys(AllRules).forEach(rule => {
+Object.keys(AllRules).forEach((rule: string) => {
     defineRule(rule, AllRules[rule]);
 })
 import { configure } from 'vee-validate';
