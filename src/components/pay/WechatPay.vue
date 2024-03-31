@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { reactive } from 'vue';
-import { getPrePayParams } from '../../service/http'
 
 interface FormState {
     amount?: number;
@@ -38,7 +37,7 @@ function onBridgeReady () {
         console.log("error amount is undefined")
         return
     }
-    getPrePayParams(formState.amount * 100, "o9O1L6zPDqLifzfUNTa61ma8aBy4").then(response => {
+    this.$api.weixin.getPrePayParams(formState.amount * 100, "o9O1L6zPDqLifzfUNTa61ma8aBy4").then(response => {
         const data = response.data.data
         payParams.nonceStr = data.nonceStr
         payParams.package = data.package

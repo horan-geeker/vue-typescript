@@ -1,39 +1,9 @@
-import axios from 'axios'
-import {getCookie} from '../utils/cookie'
+import AuthService from "./auth"
+import UserService from "./user"
+import WeixinService from "./weixin"
 
-axios.defaults.timeout = 50000
-
-axios.interceptors.request.use(config => {
-    // ...
-    return config
-}, error => {
-    return Promise.error(error)
-})
-
-const paySystemApiDomain = `http://api.wechat.bangshang.net.cn`
-
-function authorize(state: number) {
-    return axios.get(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx844b3963c0aa164e&redirect_uri=http%3A%2F%2Fapi.wechat.bangshang.net.cn%2Fauth%2Fwechat-callback&response_type=code&scope=snsapi_base&state=` + state + `#wechat_redirect`)
-}
-
-function getPrePayParams(amount: number, openid: string) {
-    return axios.post(paySystemApiDomain + `/pay/wechat-jsapi-pay`, {
-        "amount": amount,
-        "openid": openid
-    })
-}
-
-function getUserInfo() {
-    const token = getCookie('token')
-    return axios.get(paySystemApiDomain + `/users/userinfo`, {
-        headers: {
-            'Authorization': token
-        }
-    })
-}
-
-export {
-    authorize,
-    getPrePayParams,
-    getUserInfo,
+export const api = {
+    auth: new AuthService(),
+    user: new UserService(),
+    weixin:  new WeixinService(),
 }

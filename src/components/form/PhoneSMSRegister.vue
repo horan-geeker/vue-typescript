@@ -65,21 +65,23 @@ const onSubmit = handleSubmit(submitHandler, invalidSubmitHandler)
                     <input name="password" class="form-control"
                         :class="{ 'is-valid': passwordField.meta.touched && passwordField.meta.valid, 'is-invalid': passwordField.meta.touched && !passwordField.meta.valid }"
                         v-model="password" v-bind="passwordAttrs" type="password" id="password"
-                        @blur="passwordField.handleBlur" />
+                        @blur="passwordField.handleBlur" /><i class="fa fa-lock"></i>
                     <div class="invalid-feedback" v-if="!passwordField.meta.valid && passwordField.meta.touched">
                         <span>{{ passwordField.errorMessage.value }}</span>
                     </div>
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="passwordConfirm" class="col-sm-4 col-form-label text-md-end">密码</label>
+                <label for="passwordConfirm" class="col-sm-4 col-form-label text-md-end">确认密码</label>
                 <div class="col-sm-8">
                     <input name="passwordConfirm" class="form-control"
                         :class="{ 'is-valid': passwordConfirmField.meta.touched && passwordConfirmField.meta.valid, 'is-invalid': passwordConfirmField.meta.touched && !passwordConfirmField.meta.valid }"
                         v-model="passwordConfirm" v-bind="passwordConfirmAttrs" type="password" id="passwordConfirm"
                         @blur="passwordConfirmField.handleBlur" />
-                    <div class="invalid-feedback" v-if="!passwordConfirmField.meta.valid && passwordConfirmField.meta.touched">
-                        <span>{{ passwordConfirmField.errorMessage.value }}</span></div>
+                    <div class="invalid-feedback"
+                        v-if="!passwordConfirmField.meta.valid && passwordConfirmField.meta.touched">
+                        <span>{{ passwordConfirmField.errorMessage.value }}</span>
+                    </div>
                 </div>
             </div>
             <div class="d-flex justify-content-end">

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useField, useForm, type SubmissionContext,  type InvalidSubmissionContext } from 'vee-validate'
+import { api } from '@/service/http'
 
 interface Form {
     phone: number;
@@ -13,12 +14,9 @@ const phoneField = useField<number>('phone', 'required|digits:11', {label: "手�
 const passwordField = useField<string>('password', 'required|min:8', {label: "密码"})
 
 function submitHandler(values: Form, ctx: SubmissionContext) {
-    console.log("submitHandler", values, ctx)
-    return new Promise<void>(resolve => {
-        setTimeout(() => {
-            console.log('Submitted', JSON.stringify(values, null, 2));
-            resolve();
-        }, 2000);
+    return api.auth.login({
+        phone: values.phone,
+        password: values.password
     });
 }
 
