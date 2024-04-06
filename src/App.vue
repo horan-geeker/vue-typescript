@@ -1,18 +1,18 @@
 <script setup lang="ts">
-
+import { HeartFilled } from '@ant-design/icons-vue'
 </script>
 
 <template>
   <div>
-    <header>
-      <div><h1 class="logo">网盟系统</h1></div>
-    </header>
-    <div class="container">
-      <RouterView />
-    </div>
-    <footer class="d-flex justify-content-center">
-      <span>@copyright HoranHe</span>
-    </footer>
+    <a-layout>
+      <a-layout-header class="logo">后台管理系统</a-layout-header>
+      <a-layout-content style="background-color: beige;">
+        <RouterView />
+      </a-layout-content>
+      <a-layout-footer class="d-flex justify-content-center">
+        <span>@copyright<HeartFilled style="color: red" />HoranHe</span>
+      </a-layout-footer>
+    </a-layout>
   </div>
 </template>
 

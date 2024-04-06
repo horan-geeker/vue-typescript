@@ -2,7 +2,7 @@ import axios from 'axios'
 import type { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 import { getCookie } from '@/utils/cookie'
 
-interface CommonResponse<T> {
+export interface CommonResponse<T> {
     traceId: string,
     spanId: string,
     code: number,

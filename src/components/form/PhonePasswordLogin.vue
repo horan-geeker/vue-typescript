@@ -11,12 +11,14 @@ const [phone, phoneAttrs] = defineField('phone')
 const [password, passwordAttrs] = defineField('password')
 
 const phoneField = useField<number>('phone', 'required|digits:11', {label: "手机号"})
-const passwordField = useField<string>('password', 'required|min:8', {label: "密码"})
+const passwordField = useField<string>('password', 'required|min:6', {label: "密码"})
 
 function submitHandler(values: Form, ctx: SubmissionContext) {
     return api.auth.login({
         phone: values.phone,
         password: values.password
+    }).then(response => {
+        console.log(response.data.data.user)
     });
 }
 

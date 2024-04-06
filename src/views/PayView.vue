@@ -14,14 +14,14 @@
 
 <script lang="ts" setup>
 import { onMounted } from 'vue';
+import { api } from '@/service/http'
 import  WechatPay from '../components/pay/WechatPay.vue'
 
 var openid = 0
 
 onMounted(() => {
-  this.$api.user.getUserInfo().then(response => {
-    const data = response.data.data
-    openid = data.openid
+  api.user.getUserInfo().then(response => {
+    openid = response.user.id
   }).catch(err =>  {
     console.log(err)
   })

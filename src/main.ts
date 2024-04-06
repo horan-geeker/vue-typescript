@@ -1,6 +1,10 @@
 import './assets/main.css'
+// 引入 bootstrap 样式
 import 'bootstrap/dist/css/bootstrap.css'
-
+// 注册 antdesign
+import Antd from 'ant-design-vue';
+// 引入 antdesign 样式
+import 'ant-design-vue/dist/reset.css';
 // validate init
 import { defineRule } from 'vee-validate'
 import * as AllRules from '@vee-validate/rules'
@@ -27,4 +31,4 @@ setLocale('zhCN')
 const app = createApp(App)
 
 // 配置插件
-app.use(router).mount('#app')
+app.use(Antd).use(router).mount('#app')

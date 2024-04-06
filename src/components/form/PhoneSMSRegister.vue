@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { useField, useForm, type SubmissionContext, type InvalidSubmissionContext } from 'vee-validate'
+import { api } from '@/service/http'
 
 interface Form {
     phone: number;
     sms: number;
-    password: number;
-    passwordConfirm: number;
+    password: string;
+    passwordConfirm: string;
 }
 const { defineField, handleSubmit, isSubmitting } = useForm<Form>()
 const [phone, phoneAttrs] = defineField('phone')
@@ -19,12 +20,10 @@ const passwordField = useField<string>('password', 'required|min:8', { label: "�
 const passwordConfirmField = useField<string>('passwordConfirm', 'required|confirmed:@password', { label: "确认密码" })
 
 function submitHandler(values: Form, ctx: SubmissionContext) {
-    console.log("submitHandler", values, ctx)
-    return new Promise<void>(resolve => {
-        setTimeout(() => {
-            console.log('Submitted', JSON.stringify(values, null, 2));
-            resolve();
-        }, 2000);
+    return api.auth.register({
+        name: '',
+        phone: values.phone,
+        password: values.password,
     });
 }
 
