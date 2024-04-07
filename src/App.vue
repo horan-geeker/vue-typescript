@@ -6,11 +6,11 @@ import { HeartFilled } from '@ant-design/icons-vue'
   <div>
     <a-layout>
       <a-layout-header class="logo">后台管理系统</a-layout-header>
-      <a-layout-content style="background-color: beige;">
+      <a-layout-content class="container">
         <RouterView />
       </a-layout-content>
       <a-layout-footer class="d-flex justify-content-center">
-        <span>@copyright<HeartFilled style="color: red" />HoranHe</span>
+        <span class="text-align-center">@copyright<HeartFilled style="color: red" />HoranHe</span>
       </a-layout-footer>
     </a-layout>
   </div>

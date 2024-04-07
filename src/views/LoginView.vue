@@ -8,7 +8,7 @@ const activeComponent = ref('PhonePasswordLogin')
 </script>
 
 <template>
-    <div class="container">
+    <div class="d-flex justify-content-center">
         <div class="col-lg-4">
             <ul class="nav nav-tabs nav-fill m-md-2">
                 <li class="nav-item">

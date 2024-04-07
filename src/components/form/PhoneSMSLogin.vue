@@ -29,25 +29,28 @@ const onSubmit = handleSubmit(submitHandler, invalidSubmitHandler)
 </script>
 
 <template>
-    <div>
+    <div class="container p-4">
         <form autocomplete="on" @submit.prevent="onSubmit" novalidate>
             <div class="row mb-3">
-                <label for="phone" class="col-sm-4 col-form-label text-md-end">手机号</label>
-                <div class="col-sm-8">
+                <label for="phone" class="col-sm-3 col-form-label text-md-end">手机号</label>
+                <div class="col-sm-9">
                     <input name="phone" class="form-control"
-                        :class="{ 'is-valid': phoneField.meta.touched && phoneField.meta.valid, 'is-invalid': phoneField.meta.touched && !phoneField.meta.valid }"
-                        id="phone" v-model="phone" v-bind="phoneAttrs" @blur="phoneField.handleBlur" />
+                    :class="{ 'is-valid': phoneField.meta.touched && phoneField.meta.valid, 'is-invalid': phoneField.meta.touched && !phoneField.meta.valid }"
+                    id="phone" v-model="phone" v-bind="phoneAttrs" @blur="phoneField.handleBlur" />
                     <div v-if="!phoneField.meta.valid && phoneField.meta.touched" class="invalid-feedback"><span>{{ phoneField.errorMessage.value }}</span></div>
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="sms" class="col-sm-4 col-form-label text-md-end">短信验证码</label>
-                <div class="col-sm-8">
+                <label for="phone" class="col-sm-3 col-form-label text-md-end">短信验证码</label>
+                <div class="col-sm-9">
                     <input name="sms" class="form-control"
-                        :class="{ 'is-valid': smsField.meta.touched && smsField.meta.valid, 'is-invalid': smsField.meta.touched && !smsField.meta.valid }"
-                        v-model="sms" v-bind="smsAttrs" type="text" id="sms" @blur="smsField.handleBlur" />
+                    :class="{ 'is-valid': smsField.meta.touched && smsField.meta.valid, 'is-invalid': smsField.meta.touched && !smsField.meta.valid }"
+                    v-model="sms" v-bind="smsAttrs" type="text" id="sms" @blur="smsField.handleBlur" />
                     <div class="invalid-feedback" v-if="!smsField.meta.valid && smsField.meta.touched">{{ smsField.errorMessage.value }}</div>
                 </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <div class="col-md-9 col-12 d-flex justify-content-end"><p class="text-secondary">密码登录</p></div>
             </div>
             <div class="d-flex justify-content-end">
                 <button class="btn btn-primary" :disabled="isSubmitting" type="submit">{{ isSubmitting ? "请求中..." : "登录"
