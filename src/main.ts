@@ -16,6 +16,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
+import i18nPlugin from './plugins/i18n'
+
 // 配置 validate 校验规则
 Object.keys(AllRules).forEach((rule: string) => {
     defineRule(rule, AllRules[rule]);
@@ -31,4 +33,8 @@ setLocale('zhCN')
 const app = createApp(App)
 
 // 配置插件
-app.use(Antd).use(router).mount('#app')
+app.use(Antd).use(router).use(i18nPlugin, {
+    app: {
+        name: '后台管理系统'
+    }
+}).mount('#app')
