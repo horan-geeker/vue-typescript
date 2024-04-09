@@ -21,7 +21,8 @@ interface userInfo {
 
 interface RegisterRequest {
     name: string,
-    phone: number,
+    phone?: number,
+    email?: string,
     password: string,
 }
 
@@ -35,7 +36,7 @@ class AuthService extends BaseService {
     }
 
     async register(data: RegisterRequest) {
-        return this.post<RegisterRequest, RegisterResponse>("/auth/register", data)
+        return this.post<RegisterRequest, RegisterResponse>("/users/register", data)
     }
 }
 
