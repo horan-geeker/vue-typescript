@@ -1,16 +1,16 @@
 <script lang="ts" setup>
-import ForgetPassword from '@/components/form/ForgetPassword.vue'
+import ResetPassword from '../components/form/ResetPassword.vue'
 </script>
 
 <template>
     <div class="d-flex justify-content-center">
-        <div class="col-lg-4">
+        <div>
             <div class="m-4 pt-5">
                 <h3 class="text-center fs-4 fw-light">{{ $translate('app.name') }}</h3>
                 <div class="border-bottom"></div>
             </div>
             <div class="container p-4">
-                <ForgetPassword />
+                <ResetPassword />
             </div>
         </div>
     </div>

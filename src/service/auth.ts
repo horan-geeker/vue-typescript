@@ -1,4 +1,4 @@
-import BaseService from  './base'
+import BaseService, { type CommonResponse } from  './base'
 
 interface LoginRequest {
     phone: number
@@ -26,8 +26,10 @@ interface RegisterRequest {
     password: string,
 }
 
-interface RegisterResponse {
-
+interface ResetPasswordRequest {
+    phone: number
+    sms: number
+    password: string
 }
 
 class AuthService extends BaseService {
@@ -36,7 +38,11 @@ class AuthService extends BaseService {
     }
 
     async register(data: RegisterRequest) {
-        return this.post<RegisterRequest, RegisterResponse>("/users/register", data)
+        return this.post<RegisterRequest, any>("/users/register", data)
+    }
+
+    async resetPassword(data: ResetPasswordRequest) {
+        return this.post<ResetPasswordRequest, any>("/auth/reset-password", data)
     }
 }
 
