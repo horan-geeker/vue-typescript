@@ -50,11 +50,14 @@ const onSubmit = handleSubmit(submitHandler, invalidSubmitHandler)
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                <div class="col-md-9 col-12 d-flex justify-content-end"><p class="text-secondary">密码登录</p></div>
+                <div class="col-md-9 col-12 d-flex justify-content-end"><a class="text-secondary mb-4" @click="$emit('switchView', 'PhonePasswordLogin')">密码登录</a></div>
             </div>
             <div class="d-flex justify-content-end">
-                <button class="btn btn-primary" :disabled="isSubmitting" type="submit">{{ isSubmitting ? "请求中..." : "登录"
+                <div class="col-md-9 col-12 d-flex justify-content-between">
+                    <RouterLink to="/register" class="btn btn-success">注册</RouterLink>
+                    <button class="btn btn-primary" :disabled="isSubmitting" type="submit">{{ isSubmitting ? "请求中..." : "登录"
                     }}</button>
+                </div>
             </div>
         </form>
     </div>

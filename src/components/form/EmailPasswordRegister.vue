@@ -56,8 +56,15 @@ const confirmValidate = async (rule: Rule, value: string) => {
                 :rules="[{ required: true, message: '请输入确认密码' }, { min: 6, message: '至少需要输入6个字符' }, { validator: confirmValidate, trigger: 'change' }]">
                 <a-input-password v-model:value="formState.confirmPassword"></a-input-password>
             </a-form-item>
-            <a-form-item style="text-align: right;">
-                <a-button type="primary" html-type="submit">注册</a-button>
+            <a-form-item>
+                <a-row>
+                    <a-col offset="5" span="19">
+                        <a-row justify="space-between">
+                            <RouterLink to="/login"><a-button type="default">登录</a-button></RouterLink>
+                            <a-button type="primary" html-type="submit">注册</a-button>
+                        </a-row>
+                    </a-col>
+                </a-row>
             </a-form-item>
         </a-form>
     </a-config-provider>

@@ -3,26 +3,25 @@ import { ref } from 'vue'
 import PhonePasswordLogin from '../components/form/PhonePasswordLogin.vue'
 import PhoneSMSLogin from '../components/form/PhoneSMSLogin.vue'
 
-const activeComponent = ref('PhonePasswordLogin')
+let activeComponent = ref('PhonePasswordLogin')
+
+function switchView(componentName: string) {
+    console.log(componentName)
+    activeComponent.value = componentName
+}
 
 </script>
 
 <template>
     <div class="d-flex justify-content-center">
         <div class="col-lg-4">
-            <ul class="nav nav-tabs nav-fill m-md-2">
-                <li class="nav-item">
-                    <a class="nav-link" :class="{ active: activeComponent === 'PhonePasswordLogin' }"
-                        @click="activeComponent = 'PhonePasswordLogin'">密码登录</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" :class="{ active: activeComponent === 'PhoneSMSLogin' }"
-                        @click="activeComponent = 'PhoneSMSLogin'">短信验证码登录</a>
-                </li>
-            </ul>
+            <div class="m-4 pt-5">
+                <h3 class="text-center fs-4 fw-light">{{ $translate('app.name') }}</h3>
+                <div class="border-bottom"></div>
+            </div>
             <KeepAlive>
-                <PhonePasswordLogin v-if="activeComponent === 'PhonePasswordLogin'" />
-                <PhoneSMSLogin v-else />
+                <PhonePasswordLogin @switch-view="switchView" v-if="activeComponent === 'PhonePasswordLogin'" />
+                <PhoneSMSLogin @switch-view="switchView" v-else />
             </KeepAlive>
         </div>
     </div>
