@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useField, useForm, type SubmissionContext,  type InvalidSubmissionContext } from 'vee-validate'
 import { api } from '@/service/http'
+import SendSMSButton from './SendSMSButton.vue';
 
 interface Form {
     phone: number;
@@ -26,6 +27,11 @@ function invalidSubmitHandler(ctx: InvalidSubmissionContext<Form>) {
 
 const onSubmit = handleSubmit(submitHandler, invalidSubmitHandler)
 
+function validatePhoneBeforeSendSMS() {
+    phoneField.setTouched(true)
+    phoneField.handleBlur()
+}
+
 </script>
 
 <template>
@@ -43,9 +49,12 @@ const onSubmit = handleSubmit(submitHandler, invalidSubmitHandler)
             <div class="row mb-3">
                 <label for="phone" class="col-sm-3 col-form-label text-md-end">短信验证码</label>
                 <div class="col-sm-9">
-                    <input name="sms" class="form-control"
-                    :class="{ 'is-valid': smsField.meta.touched && smsField.meta.valid, 'is-invalid': smsField.meta.touched && !smsField.meta.valid }"
-                    v-model="sms" v-bind="smsAttrs" type="text" id="sms" @blur="smsField.handleBlur" />
+                    <div class="input-group">
+                        <input name="sms" class="form-control"
+                        :class="{ 'is-valid': smsField.meta.touched && smsField.meta.valid, 'is-invalid': smsField.meta.touched && !smsField.meta.valid }"
+                        v-model="sms" v-bind="smsAttrs" type="text" id="sms" @blur="smsField.handleBlur" />
+                        <SendSMSButton style="height: auto;" @click.prevent="validatePhoneBeforeSendSMS" />
+                    </div>
                     <div class="invalid-feedback" v-if="!smsField.meta.valid && smsField.meta.touched">{{ smsField.errorMessage.value }}</div>
                 </div>
             </div>
