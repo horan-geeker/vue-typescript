@@ -24,7 +24,7 @@
         "min_value": "{field}必须大于或等于0:{min}",
         "numeric": "{field}只能包含数字字符",
         "regex": "{field}格式无效",
-        "required": "{field}必须填写",
+        "required": "请输入{field}",
         "required_if": "{field}是必须的",
         "size": "{field}必须小于0:{size}KB",
         "url": "{field}不是一个有效的URL"

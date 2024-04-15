@@ -36,7 +36,7 @@ const confirmValidate = async (rule: Rule, value: string) => {
         console.log('validate', rule, value)
         return Promise.reject("确认密码和密码不匹配!")
     }
-    return Promise.resolve
+    return
 }
 
 </script>

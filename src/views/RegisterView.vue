@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import ForgetPassword from '@/components/form/ForgetPassword.vue'
+import PhoneSMSRegister from '@/components/form/PhoneSMSRegister.vue'
+import EmailPasswordRegister from '@/components/form/EmailPasswordRegister.vue';
 </script>
 
 <template>
@@ -10,7 +11,7 @@ import ForgetPassword from '@/components/form/ForgetPassword.vue'
                 <div class="border-bottom"></div>
             </div>
             <div class="container p-4">
-                <ForgetPassword />
+                <EmailPasswordRegister />
             </div>
         </div>
     </div>

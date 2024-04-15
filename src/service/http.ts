@@ -1,9 +1,11 @@
 import AuthService from "./auth"
+import NotifyService from "./notify"
 import UserService from "./user"
 import WeixinService from "./weixin"
 
-export const api = {
+export default {
     auth: new AuthService(),
     user: new UserService(),
     weixin:  new WeixinService(),
+    notify: new NotifyService(),
 }
